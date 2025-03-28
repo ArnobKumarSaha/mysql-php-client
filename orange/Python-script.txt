@@ -1,0 +1,71 @@
+for Python is this :
+ 
+from sqlalchemy import create_engine
+
+from utils.VaultSecret import VaultSecrets
+ 
+vault_secrets = VaultSecrets()
+
+mysql_credentials = vault_secrets.get_secret('MySQL')
+ 
+ 
+class MySQLSingleton:
+
+    """
+
+    Singleton class for MySQL connection
+ 
+    This module creates a singleton instance of a MySQL connection using SQLAlchemy. It retrieves
+
+    the necessary MySQL credentials from a Vault secret and establishes a connection string.
+
+    The connection is created with the `pool_pre_ping` option enabled to better check the health
+
+    of the connection.
+ 
+    The class ensures that only a single instance of the MySQL connection is created and returned
+
+    for the lifetime of the application.
+ 
+    Attributes:
+
+        _instance (MySQLSingleton): The single instance of the MySQLSingleton class.
+
+        engine (sqlalchemy.engine.Engine): The SQLAlchemy engine object representing the MySQL
+
+        connection.
+ 
+    Returns:
+
+        MySQLSingleton: The singleton instance of the MySQL connection.
+
+    """
+ 
+    _instance = None
+ 
+    def __new__(cls, *args, **kwargs):
+
+        if not cls._instance:
+
+            cls._instance = super().__new__(cls)
+
+            # Define MySQL connection string
+
+            username = mysql_credentials['username']
+
+            password = mysql_credentials['password']
+
+            host = mysql_credentials['host']
+
+            database_name = mysql_credentials['database']
+
+            port = mysql_credentials['port']
+
+            connection_string = f'mysql+mysqlconnector://{username}:{password}@{host}:{port}/{database_name}'
+
+            # Create SQLAlchemy engine with pool_pre_ping enabled for better connection health check
+
+            cls._instance.engine = create_engine(connection_string, pool_pre_ping=True)
+
+        return cls._instance
+ 
