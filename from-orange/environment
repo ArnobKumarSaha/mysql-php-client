@@ -1,0 +1,2 @@
+Python = base image: python:3.8-slim client: SQLAlchemy==1.4.34
+PHP = docker image: php:8.2-apache client: mysqlnd 8.2.28

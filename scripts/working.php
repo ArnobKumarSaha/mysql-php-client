@@ -5,12 +5,12 @@ $database = "mysql";
 // $ca_cert = "/Users/arnobkumarsaha/go/src/github.com/ArnobKumarSaha/mysql-php-client/envoy/ca.crt";
 
 # no tls db
-// $port = 10007;
-// $password = "NK)9(YIN4lj.YSzg"; 
+$port = 10007;
+$password = "NK)9(YIN4lj.YSzg"; 
 
 # tls db
-$port = 10002;
-$password = "fWN1ibPIy5RvgNAp"; 
+// $port = 10002;
+// $password = "fWN1ibPIy5RvgNAp"; 
 
 
 

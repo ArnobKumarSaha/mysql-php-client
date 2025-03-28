@@ -1,0 +1,174 @@
+apiVersion: kubedb.com/v1
+kind: MySQL
+metadata:
+  annotations:
+    app.kubernetes.io/cluster-tier: GeneralPurpose
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"kubedb.com/v1","kind":"MySQL","metadata":{"annotations":{"app.kubernetes.io/cluster-tier":"GeneralPurpose","meta.helm.sh/release-name":"my-notls","meta.helm.sh/release-namespace":"demo"},"labels":{"app.kubernetes.io/instance":"my-notls","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"mysqls.kubedb.com"},"name":"my-notls","namespace":"demo"},"spec":{"deletionPolicy":"WipeOut","monitor":{"agent":"prometheus.io/operator","prometheus":{"exporter":{"resources":{"limits":{"memory":"256Mi"},"requests":{"cpu":"100m","memory":"128Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsGroup":0,"runAsNonRoot":true,"runAsUser":999,"seccompProfile":{"type":"RuntimeDefault"}}},"serviceMonitor":{"interval":"30s","labels":{"release":"kube-prometheus-stack"}}}},"podTemplate":{"spec":{"containers":[{"name":"mysql","resources":{"limits":{"cpu":"500m","memory":"1536Mi"},"requests":{"cpu":"500m","memory":"1536Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsGroup":0,"runAsNonRoot":true,"runAsUser":999,"seccompProfile":{"type":"RuntimeDefault"}}},{"name":"mysql-coordinator","resources":{"limits":{"memory":"256Mi"},"requests":{"cpu":"200m","memory":"256Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsGroup":0,"runAsNonRoot":true,"runAsUser":999,"seccompProfile":{"type":"RuntimeDefault"}}}],"initContainers":[{"name":"mysql-init","resources":{"limits":{"memory":"512Mi"},"requests":{"cpu":"200m","memory":"256Mi"}},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"runAsGroup":0,"runAsNonRoot":true,"runAsUser":999,"seccompProfile":{"type":"RuntimeDefault"}}}],"nodeSelector":{"kubernetes.io/os":"linux"},"securityContext":{"fsGroup":999}}},"replicas":3,"storage":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}},"storageClassName":"local-path"},"storageType":"Durable","topology":{"mode":"GroupReplication"},"version":"8.0.36"}}
+    meta.helm.sh/release-name: my-notls
+    meta.helm.sh/release-namespace: demo
+  creationTimestamp: "2025-03-27T08:02:57Z"
+  finalizers:
+  - kubedb.com
+  generation: 2
+  labels:
+    app.kubernetes.io/instance: my-notls
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mysqls.kubedb.com
+  name: my-notls
+  namespace: demo
+  resourceVersion: "280552"
+  uid: 1e8880e6-d4d3-4716-96c9-605a6755188d
+spec:
+  allowedReadReplicas:
+    namespaces:
+      from: Same
+  allowedSchemas:
+    namespaces:
+      from: Same
+  authSecret:
+    name: my-notls-auth
+  autoOps: {}
+  deletionPolicy: WipeOut
+  healthChecker:
+    failureThreshold: 1
+    periodSeconds: 10
+    timeoutSeconds: 10
+  monitor:
+    agent: prometheus.io/operator
+    prometheus:
+      exporter:
+        port: 56790
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 0
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+      serviceMonitor:
+        interval: 30s
+        labels:
+          release: kube-prometheus-stack
+  podTemplate:
+    controller: {}
+    metadata: {}
+    spec:
+      containers:
+      - name: mysql
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1536Mi
+          requests:
+            cpu: 500m
+            memory: 1536Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 0
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+      - name: mysql-coordinator
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 0
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+      initContainers:
+      - name: mysql-init
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 0
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+      nodeSelector:
+        kubernetes.io/os: linux
+      podPlacementPolicy:
+        name: default
+      securityContext:
+        fsGroup: 999
+      serviceAccountName: my-notls
+  replicas: 3
+  storage:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi
+    storageClassName: local-path
+  storageType: Durable
+  topology:
+    group:
+      mode: Single-Primary
+      name: 112d2c80-fb83-4ac7-a28f-814491530bc4
+    mode: GroupReplication
+  useAddressType: DNS
+  version: 8.0.36
+status:
+  conditions:
+  - lastTransitionTime: "2025-03-27T08:02:57Z"
+    message: 'The KubeDB operator has started the provisioning of MySQL: demo/my-notls'
+    reason: DatabaseProvisioningStartedSuccessfully
+    status: "True"
+    type: ProvisioningStarted
+  - lastTransitionTime: "2025-03-27T08:03:28Z"
+    message: All desired replicas are ready.
+    reason: AllReplicasReady
+    status: "True"
+    type: ReplicaReady
+  - lastTransitionTime: "2025-03-27T08:04:08Z"
+    message: database demo/my-notls is accepting connection
+    observedGeneration: 2
+    reason: AcceptingConnection
+    status: "True"
+    type: AcceptingConnection
+  - lastTransitionTime: "2025-03-27T08:04:08Z"
+    message: database demo/my-notls is ready
+    observedGeneration: 2
+    reason: AllReplicasReady
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2025-03-27T08:04:13Z"
+    message: 'The MySQL: demo/my-notls is successfully provisioned.'
+    observedGeneration: 2
+    reason: DatabaseSuccessfullyProvisioned
+    status: "True"
+    type: Provisioned
+  observedGeneration: 2
+  phase: Ready
