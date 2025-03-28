@@ -1,3 +1,8 @@
 
+# php
 docker build -t arnobkumarsaha/php-test -f scripts/Dockerfile.php .
 docker run arnobkumarsaha/php-test
+
+# python
+docker build -t arnobkumarsaha/py-test -f scripts/Dockerfile.python .
+docker run arnobkumarsaha/py-test

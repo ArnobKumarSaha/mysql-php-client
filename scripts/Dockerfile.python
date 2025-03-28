@@ -1,0 +1,16 @@
+
+FROM python:3.8-slim
+
+RUN apt update
+RUN apt install vim -y
+
+RUN pip install sqlalchemy==1.4.34
+RUN pip install mysql-connector-python
+
+COPY scripts/hello.py /hello.py
+
+# CMD php -v | grep -i cli && php -i | grep -i 'Client API library version' && php /working.php
+CMD python /hello.py
+
+
+
